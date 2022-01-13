@@ -46,4 +46,8 @@ class Merchant(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     @JoinColumn(name = "merchant_join_id")
     var purchases: MutableSet<PurchaseUnit> = mutableSetOf(),
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @JoinColumn(name = "merchant_id")
+    var subscriptionPlans: MutableSet<SubscriptionPlan> = mutableSetOf(),
 )
