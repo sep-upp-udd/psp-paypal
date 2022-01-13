@@ -4,7 +4,7 @@ import rs.ac.uns.psppaypal.model.enums.CurrencyCode
 import rs.ac.uns.psppaypal.model.enums.DisbursementMode
 import java.io.Serializable
 
-class GetOrderResponse (
+class GetOrderResponse(
     var purchaseUnit: PurchaseUnitDto,
     var clientId: String,
     var successAddress: String,
@@ -14,4 +14,4 @@ class GetOrderResponse (
     var disbursementMode: DisbursementMode,
     var platformFeeValue: Double,
     var platformFeeCurrency: CurrencyCode,
-    ):Serializable
+) : Serializable
