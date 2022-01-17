@@ -3,7 +3,8 @@ package rs.ac.uns.psppaypal.controller
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import rs.ac.uns.psppaypal.controller.dto.*
+import rs.ac.uns.psppaypal.controller.dto.GetOrderRequest
+import rs.ac.uns.psppaypal.controller.dto.SaveOrderRequest
 import rs.ac.uns.psppaypal.exceptions.MerchantNotFoundException
 import rs.ac.uns.psppaypal.exceptions.PlanNotFoundException
 import rs.ac.uns.psppaypal.exceptions.WrongMerchantException
@@ -24,7 +25,7 @@ class PaymentController(private val orderService: OrderService) {
         }
     }
 
-    @PostMapping
+    @PostMapping("/")
     fun order(@RequestBody saveOrderRequest: SaveOrderRequest): ResponseEntity<Any> {
         return try {
             ResponseEntity(orderService.saveOrder(saveOrderRequest), HttpStatus.OK)
@@ -33,11 +34,11 @@ class PaymentController(private val orderService: OrderService) {
         }
     }
 
-    @GetMapping("subscription/{merchantUuid}/{planUuid}")
+    @GetMapping("/subscription/{merchantUuid}/{planUuid}")
     fun subscription(
-        @PathVariable(value = "merchantUuid") merchantUuid: String, @PathVariable(value = "planUuid") planUuid: String
-    ):
-            ResponseEntity<Any> {
+        @PathVariable(value = "merchantUuid") merchantUuid: String,
+        @PathVariable(value = "planUuid") planUuid: String
+    ): ResponseEntity<Any> {
         return try {
             val subscriptionResponse = orderService.getSubscription(merchantUuid, planUuid)
             ResponseEntity(subscriptionResponse, HttpStatus.OK)
