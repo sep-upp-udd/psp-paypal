@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service
 import rs.ac.uns.psppaypal.controller.dto.AddSubscriptionPlanRequest
 import rs.ac.uns.psppaypal.controller.dto.RegistrationRequest
 import rs.ac.uns.psppaypal.controller.dto.RegistrationResponse
+import rs.ac.uns.psppaypal.exceptions.MerchantNotFoundException
 import rs.ac.uns.psppaypal.exceptions.WrongMerchantException
 import rs.ac.uns.psppaypal.model.Merchant
 import rs.ac.uns.psppaypal.model.SubscriptionPlan
@@ -41,5 +42,11 @@ class RegistrationServiceImpl(
         merchant.subscriptionPlans.add(SubscriptionPlan(planId = addSubscriptionPlanRequest.planId, uuid = uuid))
         merchantRepository.save(merchant)
         return uuid
+    }
+
+    override fun disable(merchantUuid: String) {
+        val merchant = merchantRepository.findOneByUuid(merchantUuid) ?: throw MerchantNotFoundException()
+        merchant.enabled = false
+        merchantRepository.save(merchant)
     }
 }
