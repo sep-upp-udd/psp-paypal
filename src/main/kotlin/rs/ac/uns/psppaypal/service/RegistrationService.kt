@@ -8,4 +8,5 @@ import rs.ac.uns.psppaypal.controller.dto.RegistrationResponse
 interface RegistrationService {
     fun register(registrationRequest: RegistrationRequest): RegistrationResponse
     fun addSubscriptionPlan(addSubscriptionPlanRequest: AddSubscriptionPlanRequest): String
+    fun disable(merchantUuid: String)
 }

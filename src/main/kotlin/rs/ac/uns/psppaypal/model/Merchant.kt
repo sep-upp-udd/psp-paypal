@@ -50,4 +50,7 @@ class Merchant(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     @JoinColumn(name = "merchant_id")
     var subscriptionPlans: MutableSet<SubscriptionPlan> = mutableSetOf(),
+
+    @Column
+    var enabled: Boolean = true
 )
